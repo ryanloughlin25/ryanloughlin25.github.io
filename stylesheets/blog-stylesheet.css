@@ -1,14 +1,3 @@
-#blog-post {
-  float: left;
-  display: inline;
-  width: 75%;
-}
-
 #home-link {
   display: block;
-}
-
-#more-posts {
-  float: right;
-  display: inline;
 }

@@ -14,6 +14,6 @@ div {
   float: right;
 }
 
-a {
+div > a {
   display: block;
 }

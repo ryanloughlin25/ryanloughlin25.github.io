@@ -1,19 +1,24 @@
-div {
-  display: inline-block;
+#about {
+  display: block;
   width: 50%;
+  margin: 50px;
+}
+
+#links > div {
   margin-left: 50px;
+  margin-right: 50px;
+  display: inline-block;
 }
 
-#social {
-  clear: left;
-}
-
-#blog {
-  width: 10%;
-  margin: 35px;
-  float: right;
+#practice {
+  position: relative;
+  bottom: 36px;
 }
 
 div > a {
   display: block;
+}
+
+h2 {
+  margin-top: 0px;
 }

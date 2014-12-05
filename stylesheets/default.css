@@ -1,19 +1,23 @@
 #about {
   display: block;
   width: 50%;
-  margin: 50px;
+  margin-left: 10%;
+  margin-top: 5%;
 }
 
-#links > div {
-  margin-left: 50px;
-  margin-right: 50px;
-  display: inline-block;
+#social {
+  font-family: "entypo social";
+  margin-left: 15px;
 }
 
-div > a {
-  display: block;
+#links {
+  margin-left: 10%;
 }
 
-h2 {
-  margin-top: 0px;
+#blog {
+  margin-top: 5%;
+}
+
+#practice {
+  margin-top: 5%;
 }

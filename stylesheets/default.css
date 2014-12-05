@@ -10,11 +10,6 @@
   display: inline-block;
 }
 
-#practice {
-  position: relative;
-  bottom: 36px;
-}
-
 div > a {
   display: block;
 }

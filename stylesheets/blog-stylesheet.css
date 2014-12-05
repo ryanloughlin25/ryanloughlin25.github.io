@@ -1,3 +1,15 @@
 #home-link {
   display: block;
 }
+
+#blog-post {
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+#water-images > img {
+  display: inline-block;
+  width: 40%;
+  height: auto;
+  margin-left: 5%;
+}

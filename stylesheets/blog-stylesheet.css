@@ -1,10 +1,29 @@
+pre {
+  white-space: pre-line;
+  padding-left: 1%;
+}
+
 #home-link {
   display: block;
 }
 
+#blog-container {
+  margin-bottom: 5%;
+}
+
 #blog-post {
-  margin-left: 15%;
-  margin-right: 15%;
+  width: 45%;
+  margin: auto;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  background-color: white;
+  border: solid black 1px;
+}
+
+#blog-post h2 {
+  margin-top: 0;
 }
 
 #water-images > img {

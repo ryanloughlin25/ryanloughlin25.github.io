@@ -23,7 +23,8 @@ body {
   background-color: white;
   border: solid black 1px;
   position: relative;
-  top: 15%; /* top: 15%; looks good with current number of blog posts.  will need to adjust */
+  top: 20%; /* looks good with currently, but is not dynamic. */
+  box-shadow: 2px 2px;
 }
 
 #links div {
@@ -33,11 +34,28 @@ body {
 
 #social a {
   font-family: "entypo-social";
-  font-size: 2.5em;
+  font-size: 3em;
   color: black;
   text-decoration: none;
 }
 
+#blog {
+  margin-top: 5%;
+}
+
 #blog a {
   display: block;
+  font-size: 1.1em;
+}
+
+#blog a:link {
+  color: black;
+}
+
+#blog a:hover {
+  font-weight: bold;
+}
+
+#blog a:visited {
+  color: #a6a6a6;
 }

@@ -48,14 +48,14 @@ body {
   font-size: 1.1em;
 }
 
-#blog a:link {
+a:link {
   color: black;
 }
 
-#blog a:hover {
+a:hover {
   font-weight: bold;
 }
 
-#blog a:visited {
+a:visited {
   color: #a6a6a6;
 }

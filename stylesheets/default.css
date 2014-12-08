@@ -23,7 +23,7 @@ body {
   background-color: white;
   border: solid black 1px;
   position: relative;
-  top: 20%; /* looks good with currently, but is not dynamic. */
+  top: 20%; /* looks good currently, but is not dynamic. */
   box-shadow: 2px 2px;
 }
 
@@ -32,11 +32,37 @@ body {
   text-align: center;
 }
 
+#social div {
+  display: inline-block;
+  width: 50px;  /* looks good currently, but is not dynamic. */
+  height: 50px;
+  border-radius: 15%;
+}
+
 #social a {
+  display: block;
+  height: 100%;
   font-family: "entypo-social";
   font-size: 3em;
-  color: black;
+  font-weight: normal;
+  color: #333333;
   text-decoration: none;
+}
+
+#linkedin:hover {
+  background-color: #007bb6;
+}
+
+#linkedin a {
+  color: #333333;
+}
+
+#linkedin a:hover {
+  color: white;
+}
+
+#twitter a:hover {
+  color: #4099FF;
 }
 
 #blog {
@@ -45,14 +71,11 @@ body {
 
 #blog a {
   display: block;
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 a:link {
-  color: black;
-}
-
-a:hover {
+  color: #333333;
   font-weight: bold;
 }
 

@@ -7,7 +7,7 @@
 </head>
 <body>
   <div id="blog-container">
-    <a href="https://ryanloughlin25.github.io" id="home-link">home</a>
+    <a href="../index.html" id="home-link">home</a>
     <div id="blog-post">
       <h2>Comparing basic usage of arrays and hashes</h2>
       <h4>12/5/2014</h4>
@@ -15,19 +15,19 @@
         Arrays and hashes can be tricky at first.  Before we get into that though it's important to make sure we have a similar perspective on variables.  For now, we can think of a variable as something with three properties - a name, a class, and a value.  The following code (in irb) creates 2 variables.
         <pre>
           <code>
-            > my_integer = 5
-            #=> 5
-            > my_string = "bananas"
-            #=> "bananas"
+>> my_integer = 5
+#=> 5
+>> my_string = "bananas"
+#=> "bananas"
           </code>
         </pre>
         The first variable is named <code>my_integer</code>, has a class of <code>Fixnum</code> (i.e. number), and has a value of <code>5</code>.  The second variable is named <code>my_string</code>, has a class of <code>String</code>, and has a value of <code>"bananas"</code>.  Ruby will use the value of a variable whenever we write the name of a variable.  Lets see an example.
         <pre>
           <code>
-            > 5 + 7
-            #=> 12
-            > my_integer + 7
-            #=> 12
+>> 5 + 7
+#=> 12
+>> my_integer + 7
+#=> 12
           </code>
         </pre>
         Both the code <code>5 + 7</code> and <code>my_integer + 7</code> have a result of 12 because <code>my_integer</code> has a value of 5.  Of course we could change the value of a variable later (we call them variables because the value varies) and then the result of any new code we write would use the new value.
@@ -36,23 +36,23 @@
         <code>Array</code> is a class of variable.  One way to make an array is like this.
         <pre>
           <code>
-            > my_array = [5, 10, 15, 20]
-            #=> [5, 10, 15, 20]
+>> my_array = [5, 10, 15, 20]
+#=> [5, 10, 15, 20]
           </code>
         </pre>
         Now we have a variable named <code>my_array</code> with a class of <code>Array</code> and the value <code>[5, 10, 15, 20]</code>.  As you can see this "value" is really multiple values at once.  That's the point of an array.We can use the variable name <code>my_array</code> to refer to all the values at once or we can use the <code>[]</code> operator to refer to one value at a time.  That sounds harder than it is, so lets try it.
         <pre>
           <code>
-            > my_array
-            #=> [5, 10, 15, 20]
-            > my_array[0]
-            #=> 5
-            > my_array[1]
-            #=> 10
-            > my_array[2]
-            #=> 15
-            > my_array[3]
-            #=> 20
+>> my_array
+#=> [5, 10, 15, 20]
+>> my_array[0]
+#=> 5
+>> my_array[1]
+#=> 10
+>> my_array[2]
+#=> 15
+>> my_array[3]
+#=> 20
           </code>
         </pre>
       </p>
@@ -63,41 +63,41 @@
         That's where hashes come in.  The code to make a hash looks different than the code to make an array, but after we make them the code to use them is pretty similar.  So first let's make a hash and let's use the same information as our array to keep it simple.
         <pre>
           <code>
-            > my_hash = {0 => 5, 1 => 10, 2 => 15, 3 => 20}
-            #=> {0=>5, 1=>10, 2=>15, 3=>20}
+>> my_hash = {0 => 5, 1 => 10, 2 => 15, 3 => 20}
+#=> {0=>5, 1=>10, 2=>15, 3=>20}
           </code>
         </pre>
         Now we have a variable named <code>my_hash</code> with a class of <code>Hash</code> and the value <code>{0=>5, 1=>10, 2=>15, 3=>20}</code>.  Hashes are intended for storing pairs of things.  Each pair has a key and a value.  <code>{0=>5, 1=>10, 2=>15, 3=>20}</code> means that the key <code>0</code> is associated with the value <code>5</code>, the key <code>1</code> is associated with the value <code>10</code>, and so on.  I said we were going to put the same information in the hash as we put in the array.  Watch this.
         <pre>
           <code>
-            > my_hash[0]
-            #=> 5
-            > my_hash[1]
-            #=> 10
-            > my_hash[2]
-            #=> 15
-            > my_hash[3]
-            #=> 20
+>> my_hash[0]
+#=> 5
+>> my_hash[1]
+#=> 10
+>> my_hash[2]
+#=> 15
+>> my_hash[3]
+#=> 20
           </code>
         </pre>
         Look familiar?  We can use the <code>[]</code> operator to get values from a hash just like we did with an array.  The great thing about hashes is that we can also change the keys.  If 5, 10, 15, and 20 are the scores for Beth, John, Anthony, and Susan in some game, then we can use a hash to associate their names with their scores.  Their names will be the keys and their scores will be the values.  Let's make a new hash where the keys are the player's names.
         <pre>
           <code>
-            > scores_hash = {"Beth" => 5, "John" => 10, "Anthony" => 15, "Susan" => 20}
-            #=> {"Beth"=>5, "John"=>10, "Anthony"=>15, "Susan"=>20}
+>> scores_hash = {"Beth" => 5, "John" => 10, "Anthony" => 15, "Susan" => 20}
+#=> {"Beth"=>5, "John"=>10, "Anthony"=>15, "Susan"=>20}
           </code>
         </pre>
         Now we can use the <code>[]</code> operator to access each player's score using their name, which we couldn't have done with an array.
         <pre>
           <code>
-            > scores_hash["Beth"]
-            #=> 5
-            > scores_hash["John"]
-            #=> 10
-            > scores_hash["Anthony"]
-            #=> 15
-            > scores_hash["Susan"]
-            #=> 20
+>> scores_hash["Beth"]
+#=> 5
+>> scores_hash["John"]
+#=> 10
+>> scores_hash["Anthony"]
+#=> 15
+>> scores_hash["Susan"]
+#=> 20
           </code>
         </pre>
       </p>

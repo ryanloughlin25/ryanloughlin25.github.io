@@ -81,4 +81,5 @@ a:link {
 
 a:visited {
   color: #a6a6a6;
+  font-weight: normal; /* does not work because of security concerns.  see http://hacks.mozilla.org/2010/03/privacy-related-changes-coming-to-css-vistited/*/
 }

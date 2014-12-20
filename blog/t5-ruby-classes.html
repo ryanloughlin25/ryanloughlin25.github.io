@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<head>
+  <title>stopwatch</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../stylesheets/default.css">
+  <link rel="stylesheet" type="text/css" href="../stylesheets/blog-stylesheet.css">
+</head>
+<body>
+  <div id="blog-container">
+    <a href="../index.html" id="home-link">home</a>
+    <div id="blog-post">
+      <h2>Class example</h2>
+      <h4>12/19/14</h4>
+      <p>
+        My example class is meant to mimic a simple stopwatch with 3 buttons - start, stop, and reset.  I will describe each method in the class and you can view the code <a href="../ruby/stopwatch.rb">here</a>.
+      </p>
+      <p>
+        First, the <code>initialize</code> method.  The <code>Stopwatch class</code> does not accept arguments.  It has 3 instance variables - <code>@accumulated</code>, <code>@start_time</code>, and <code>@status</code>.  <code>@accumulated</code> represents the total time from previously starting/stopping the stopwatch.  <code>@start_time</code> is a timestamp of the last time the watch was started.  <code>@status</code> can be either <code>:running</code> or <code>:stopped</code> depending on whether the watch is running.
+      </p>
+      <p>
+        The <code>start</code> method only does anything is the watch is current stopped.  If it is stopped, then it will update <code>@status</code> to <code>:running</code> and record the current time in <code>@start_time</code>.  This lets the watch keep track of how much time has passed since <code>start</code> was called.
+      </p>
+      <p>
+        The <code>stop</code> method only does anything if the watch is currently running.  If it is running, then it will update <code>@status</code> to <code>:stopped</code> and add the different between the current time and <code>@start_time</code> to <code>@accumulated</code>.  This way the watch will store previously accumulated time even if it is started again later.
+      </p>
+      <p>
+        The <code>reset</code> method sets all instance variables back to their initial state as though initialize had just been called.
+      </p>
+      <p>
+        Finally, the <code>time</code> method will return the current time that would be displayed on the face of a stopwatch.  If the watch is stopped, then the <code>time</code> method will simply return <code>@accumulated</code>.  If the watch is running then the <code>time</code> method will return the different between the current time and <code>@start_time</code> plus <code>@accumulated</code>.
+      </p>
+    </div>
+  </div>
+</body>

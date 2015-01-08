@@ -18,7 +18,24 @@
         Functional programming is a style of programming focused on mathematical formalism.  Functional programming avoids mutable data and changes of state by using functions.  Here function is a formal term meaning a relation between a set of inputs and outputs.  This means that if we run the same code twice then the output should be the same both times.  Reading that it probably sounds obviously true.  Why would we want code that has a different output the second time?  But most programmers do this all the time.  A simple example is <code> x = x + 1 </code>.  If we run <code> x = x + 1 </code> twice then it increments x both times, but the output is different each time.  In fact, out of context, we have no idea what the output of <code> x = x + 1 </code> actually is.  Is x 5?  Or maybe 73?  This isn't necessarily a problem, but it does disagree with most of what is taught in math classes.  If we treat x = x + 1 as an algebra equation it is clearly nonsense.  Subtract x from both the sides and the resulting equation is 0 = 1.  Functional programming encouranges code that follows mathematical formalism.  This might sound odd and overly theoretical, but it tends to be much easier than it sounds and often results in simpler code.
       </p>
       <p>
-        I will show an example of each one separately and then an example combining the two.  The examples will be of a standard deck of 52 playing cards.  First the object oriented example.  There will be two classes, Card and Deck, and a few lines to draw and display two 5 card hands.  Here is the Card class:
+        I will show an example of each one separately and then an example combining the two.  The examples will be of a standard deck of 52 playing cards.  First, here is the output that each program should produce (although the specific cards are random each time):
+      </p>
+      <pre><code>
+my hand is:
+Six of Spades
+Eight of Spades
+Two of Diamonds
+Ten of Clubs
+Two of Clubs
+
+your hand is:
+Three of Clubs
+Ace of Clubs
+Eight of Clubs
+Seven of Clubs
+Ace of Hearts
+      </pre></code>
+        In the object oriented example there will be two classes, Card and Deck, and a few lines to draw and display two 5 card hands.  Here is the Card class:
       </p>
       <pre><code>
 class Card
@@ -79,7 +96,7 @@ class Deck
 end
       </pre></code>
       <p>
-        <code>Deck</code> is more involved.  It has two constants to represent the suits and values of standard playing cards.  <code>initialize</code> has no arguments and creates two instance variables, <code>@cards_in_deck</code> and <code>@drawn_cards</code>.  <code>@cards_in_deck</code> is initialized to an <code>Array</code> of 52 <code>Card</code> objects and <code>@drawn_cards</code> in initialized to an empty <code>Array</code>.  <code>Shuffle</code> and <code>reset_deck</code> are fairly simple.  <code>shuffle</code> randomizes <code>@cards_in_deck</code> and <code>reset_deck</code> puts all the <code>Cards</code> back in <code>@cards_in_deck</code>.  <code>draw</code> accepts the <code>number_of_cards</code> to draw and moves the first <code>number_of_cards</code> <code>Cards</code> from <code>@cards_in_deck</code> to <code>@drawn_cards</code> and returns those <code>Cards</code>.  This way there is a separation between the cards that are in the deck and the cards that are in a players hand or otherwise drawn.  Here is a few lines using the <code>Deck</code> class to draw five card hands for us:
+        <code>Deck</code> is more involved.  It has two constants to represent the suits and values of standard playing cards.  <code>initialize</code> has no arguments and creates two instance variables, <code>@cards_in_deck</code> and <code>@drawn_cards</code>.  <code>@cards_in_deck</code> is initialized to an <code>Array</code> of 52 <code>Card</code> objects and <code>@drawn_cards</code> in initialized to an empty <code>Array</code>.  <code>Shuffle</code> and <code>reset_deck</code> are fairly simple.  <code>shuffle</code> randomizes <code>@cards_in_deck</code> and <code>reset_deck</code> puts all the <code>Cards</code> back in <code>@cards_in_deck</code>.  <code>draw</code> accepts the <code>number_of_cards</code> to draw and moves the first <code>number_of_cards</code> <code>Cards</code> from <code>@cards_in_deck</code> to <code>@drawn_cards</code> and returns those <code>Cards</code>.  This way there is a separation between the cards that are in the deck and the cards that are in a players hand or otherwise drawn.  Here is a few lines using the <code>Deck</code> class to produce the desired output:
       </p>
       <pre><code>
 deck = Deck.new
@@ -92,24 +109,6 @@ puts my_hand
 puts
 puts "your hand is:"
 puts your_hand
-      </pre></code>
-      <p>
-        And the output of the code:
-      </p>
-      <pre><code>
-my hand is:
-Six of Spades
-Eight of Spades
-Two of Diamonds
-Ten of Clubs
-Two of Clubs
-
-your hand is:
-Three of Clubs
-Ace of Clubs
-Eight of Clubs
-Seven of Clubs
-Ace of Hearts
       </pre></code>
       <p>
         Now lets look at a functional style program that produces similar output.  This program is much shorter so I will list all of it at once and then explain it.
@@ -137,26 +136,48 @@ puts "your hand is:"
 display_hand(your_hand)
       </pre></code>
       <p>
-        The <code>display_hand</code> method takes an <code>Array</code> representing a hand of cards and puts a reasonable output for each one.  It is analogous to the <code>to_s</code> method in the <code>Card</code> class from the previous example.  Then we have our <code>suits</code> and <code>values</code> again.  The line <code>deck = suits.product(values)</code> creates an <code>Array</code> of 52 <code>Arrays</code> representing the 52 cards by taking the cartesian product of the <code>suits</code> and <code>values</code> (it looks like this <code>[["Heart", "Ace"], ["Heart", "Two"], ["Heart", "Three"], ... ]</code>).  <code>my_hand</code> is created by using <code>sample</code> on <code>deck</code> to get 5 of these "cards".  Next <code>my_hand</code> is removed from <code>deck</code> and <code>your_hand</code> is drawn from the <code>remaining_deck</code>.  Then it has similar code the the previous example to display the hands and similar output as follows:
+        The <code>display_hand</code> method takes an <code>Array</code> representing a hand of cards and puts a reasonable output for each one.  It is analogous to the <code>to_s</code> method in the <code>Card</code> class from the previous example.  Then we have our <code>suits</code> and <code>values</code> again.  The line <code>deck = suits.product(values)</code> creates an <code>Array</code> of 52 <code>Arrays</code> representing the 52 cards by taking the cartesian product of the <code>suits</code> and <code>values</code> (it looks like this <code>[["Heart", "Ace"], ["Heart", "Two"], ["Heart", "Three"], ... ]</code>).  <code>my_hand</code> is created by using <code>sample</code> on <code>deck</code> to get 5 of these "cards".  Next <code>my_hand</code> is removed from <code>deck</code> and <code>your_hand</code> is drawn from the <code>remaining_deck</code>.
+      </p>
+      <p>
+        The functional code was much shorter, but arguably harder to understand; It seems likely that more people will be familiar with classes and objects than cartesian products and nested Arrays.  However, as I said before, functional and object oriented code are not opposites.  Rather they can be used together.  Here is an example of how I would combine object oriented and functional programming to produce the current output:
       </p>
       <pre><code>
-my hand is:
-Eight of Spades
-Ten of Hearts
-Five of Spades
-Six of Spades
-Jack of Diamonds
+class Card
+  attr_reader :suit, :value
 
-your hand is:
-Jack of Spades
-Queen of Diamonds
-Five of Diamonds
-Ace of Clubs
-Six of Diamonds
+  def initialize(suit, value)
+    @suit = suit
+    @value = value
+  end
+
+  def to_s
+    "#{value} of #{suit}s"
+  end
+end
+
+def draw(deck, number_of_cards = 1, *already_drawn)
+  remaining_cards = deck - already_drawn.flatten
+  drawn_cards = remaining_cards.shuffle.sample(number_of_cards)
+
+  return drawn_cards
+end
+
+suits = ['Heart', 'Diamond', 'Club', 'Spade']
+values = [
+  'Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven',
+  'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King'
+]
+
+deck = suits.product(values).map{|(suit, value)| Card.new(suit, value)}
+my_hand = draw(deck, 5)
+your_hand = draw(deck, 5, my_hand)
+
+puts "my hand is:"
+puts my_hand
+puts
+puts "your hand is:"
+puts your_hand
       </pre></code>
-      <p>
-        The functional code was much shorter, but arguably harder to understand; It seems likely that more people will be familiar with classes and objects than cartesian products and nested Arrays.  However, as I said before, functional and object oriented code are not opposites.  Rather they can be used together
-      </p>
     </div>
   </div>
 </body>

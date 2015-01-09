@@ -11,11 +11,8 @@ class Card
   end
 end
 
-def draw(deck, number_of_cards = 1, *already_drawn)
-  remaining_cards = deck - already_drawn.flatten
-  drawn_cards = remaining_cards.sample(number_of_cards)
-
-  return drawn_cards
+def sample_except(array, n = 1, *exception_arrays)
+  (array - exception_arrays.flatten).sample(n)
 end
 
 suits = ['Heart', 'Diamond', 'Club', 'Spade']
@@ -25,8 +22,8 @@ values = [
 ]
 
 deck = suits.product(values).map{|(suit, value)| Card.new(suit, value)}
-my_hand = draw(deck, 5)
-your_hand = draw(deck, 5, my_hand)
+my_hand = sample_except(deck, 5)
+your_hand = sample_except(deck, 5, my_hand)
 
 puts "my hand is:"
 puts my_hand

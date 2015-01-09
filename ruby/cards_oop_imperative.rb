@@ -31,7 +31,7 @@ class Deck
   def shuffle!
     @cards_in_deck.shuffle!
 
-    return nil
+    return self
   end
 
   def reset_deck
@@ -39,7 +39,7 @@ class Deck
     @drawn_cards.clear
     shuffle
 
-    return nil
+    return self
   end
 
   def draw(number_of_cards = 1)

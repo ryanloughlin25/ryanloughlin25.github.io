@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<head>
+  <title>elsif vs else if</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../stylesheets/default.css">
+  <link rel="stylesheet" type="text/css" href="../stylesheets/blog-stylesheet.css">
+</head>
+<body>
+  <div id="blog-container">
+    <a href="../index.html" id="home-link">home</a>
+    <div id="blog-post">
+      <h2>If statements in JavaScript and Ruby</h2>
+      <h4>1/13/2015</h4>
+      <p>
+        The if statement is more or less the same in any programming language I have ever used.  Here is an example in Ruby:
+      </p>
+      <pre><code>
+x = 15
+
+if x.zero?
+  puts "zero"
+elsif x > 0
+  puts "positive"
+else
+  puts "negative"
+end
+      </code></pre>
+      <p>
+        The code is simple, but it is still a good example of the structure of an if statement.  There must be an <code>if</code> with a condition, there can be any number of <code>elsif</code>s, and there can be one <code>else</code> which has no condition.  These 3 keywords make up the if statement in Ruby.  Today I want to talk about elsif.
+      </p>
+      <p>
+        elsif is interesting because it is useful, but uncessary.  The same code as above could be expressed as the following if we did not have elsif:
+      </p>
+      <pre><code>
+x = 15
+
+if x.zero?
+  puts "zero"
+else
+  if x > 0
+    puts "positive"
+  else
+    puts "negative"
+  end
+end
+      </code></pre>
+      <p>
+        Here there are two if, each with an else, to accomplish the same thing as the first example with an if, an elsif, and an else.  But the second example is harder to read and so it is good we have elsif.
+      </p>
+      <p>
+        I was surprised to learn that JavaScript does not have elsif, but handles the situtation such that elsif is not missed.  Here are three ways to write the same example as above in JavaScript:
+      </p>
+      <pre><code>
+//first
+var x = 15;
+
+if (x == 0)
+  console.log("zero");
+else if (x > 0)
+  console.log("positive");
+else
+  console.log("negative");
+
+//second
+var x = 15;
+
+if (x == 0)
+  console.log("zero");
+else {
+  if (x > 0)
+    console.log("positive");
+  else
+    console.log("negative");
+}
+
+//third
+var x = 15;
+
+if (x == 0)
+  console.log("zero");
+else
+  if (x > 0)
+    console.log("positive");
+  else
+    console.log("negative");
+      </code></pre>
+      <p>
+        The first and second JavaScript examples are translations of the first and second Ruby examples.  What's surprising is that the first example allows <code>else if</code> as two keywords and they simply work together.  The third example shows why.  You would think the third example would cause an error because you need braces around the second if statement.  But you can have an else without braces if it only contains one statement and the second if statement is only one statement.  So the only difference between the first and third example is whitespace.
+      </p>
+      <p>
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/if...else#Description">There is no elsif keyword in JavaScript</a>.  JavaScript creates the illusion of elsif by simply letting you place else and if on the same line.  It's a surprisingly elegant and simple approach.
+      </p>
+    </div>
+  </div>
+</body>

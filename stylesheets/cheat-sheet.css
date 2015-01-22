@@ -1,0 +1,43 @@
+body {
+  background-color: rgb(255, 181, 181);
+}
+
+header {
+  display: block;
+  text-align: center;
+  width: 75%;
+  margin: auto;
+  font-size: 2.2em;
+}
+
+table {
+  width: 75%;
+  margin: auto;
+  margin-top: 2%;
+}
+
+thead {
+  text-align: center;
+}
+
+td {
+  border: 1px solid black;
+  font-size: 1.2em;
+}
+
+td code pre {
+  color: #ffdead;
+  background-color: #303030
+}
+
+.output {
+  color: #5eff1f;
+}
+
+.method-signature {
+  font-size: 1.25em;
+}
+
+a {
+  float: right;
+}

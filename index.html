@@ -8,10 +8,9 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
   </head>
   <body>
-    <div class="{{1 > 2 ? 'foo' : 'bar'}}">blah</div>
     <div ng-controller="GameController as game">
       <div class="row" ng-repeat="row in game.board">
-        <div class="square {{square.foo}}" ng-click="game.blah($parent.$index, $index, square)" ng-repeat="square in row">
+        <div class="square {{square.moveType}}" ng-click="game.clickSquare($parent.$index, $index, square)" ng-repeat="square in row">
           <img ng-if="square.piece" ng-src="imgs/{{square.piece}}_{{square.side}}.png">
         </div>
       </div>

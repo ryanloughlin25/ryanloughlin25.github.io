@@ -1,19 +1,11 @@
 <html ng-app="dukeApp">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="node_modules/angular2/bundles/angular2.sfx.dev.js"></script>
     <script src="js/duke.js"></script>
-    <!-- <script language="javascript" type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script> -->
-    <!-- <script src="js/application.js"></script> -->
     <link rel="stylesheet" type="text/css" href="css/application.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css">
   </head>
   <body>
-    <div ng-controller="GameController as game">
-      <div class="row" ng-repeat="row in game.board">
-        <div class="square {{square.moveType}}" ng-click="game.clickSquare($parent.$index, $index, square)" ng-repeat="square in row">
-          <img ng-if="square.piece" ng-src="imgs/{{square.piece}}_{{square.side}}.png">
-        </div>
-      </div>
-    </div>
+    <duke-board></duke-board>
   </body>
 </html>

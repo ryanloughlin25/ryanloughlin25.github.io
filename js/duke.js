@@ -12,7 +12,7 @@ angular.module('dukeApp', [])
     ];
 
     game.setAvailableMoves = function() {
-      angular.forEach(game.selectedPiece.square.moves, function(move) {
+      angular.forEach(game.selectedPiece.square.getMoves(), function(move) {
         console.log(move);
         var r = +game.selectedPiece.row + move.y;
         var c = +game.selectedPiece.column + move.x;
@@ -40,6 +40,11 @@ angular.module('dukeApp', [])
       console.log('move');
       game.board[game.selectedPiece.row][game.selectedPiece.column] = {};
       game.board[game.clickedRow][game.clickedColumn] = game.selectedPiece.square;
+      if (game.selectedPiece.square.side === 'front') {
+        game.selectedPiece.square.side = 'back';
+      } else {
+        game.selectedPiece.square.side = 'front';
+      }
     }
 
     game.clickSquare = function(row, column, square) {
@@ -63,14 +68,27 @@ angular.module('dukeApp', [])
     };
 
     //hardcode things
-    game.board[0][0] = {
+    game.board[4][4] = {
       piece: 'footman',
+      player: 'white',
       side: 'front',
-      moves: [
-        {x: 0, y: -1},
-        {x: 0, y: 1},
-        {x: -1, y: 0},
-        {x: 1, y:0},
-      ],
+      moves: {
+        front: [
+          {x: 0, y: -1},
+          {x: 0, y: 1},
+          {x: -1, y: 0},
+          {x: 1, y:0},
+        ],
+        back: [
+          {x: 0, y: -2},
+          {x: -1, y: -1},
+          {x: 1, y: -1},
+          {x: -1, y: 1},
+          {x: 1, y: 1},
+        ],
+      },
+      getMoves: function() {
+        return this.moves[this.side];
+      },
     };
   });

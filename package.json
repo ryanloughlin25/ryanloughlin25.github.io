@@ -4,7 +4,8 @@
   "description": "ryanloughlin25.github.io ========================",
   "main": "index.js",
   "scripts": {
-    "start": "live-server"
+    "tsc": "tsc -p src -w",
+    "start": "live-server --open=src"
   },
   "repository": {
     "type": "git",
@@ -18,9 +19,11 @@
   },
   "homepage": "https://github.com/ryanloughlin25/ryanloughlin25.github.io#readme",
   "dependencies": {
-    "angular2": "2.0.0-alpha.46"
+    "angular2": "2.0.0-alpha.44",
+    "systemjs": "0.19.2"
   },
   "devDependencies": {
-    "live-server": "^0.8.2"
+    "live-server": "^0.9.0",
+    "typescript": "^1.6.2"
   }
 }

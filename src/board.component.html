@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row" *ng-for="#row of squares; #i=index">
+    <div class="square"
+      *ng-for="#square of row; #j=index"
+      [class.selected]="square === selectedSquare"
+      (click)="clickSquare(i, j)">
+    </div>
+  </div>
+</div>

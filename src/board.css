@@ -1,6 +1,7 @@
 .row {
   width: 100%;
   height: 100px;
+  vertical-align:top;
 }
 
 .square {
@@ -8,8 +9,23 @@
   width: 100px;
   height: 100px;
   border: 2px solid black;
+  vertical-align:top;
+  background-color: tan;
+}
+
+.white {
+  background-color: white;
+}
+
+.black {
+  background-color: black;
+  color: white;
 }
 
 .selected {
+  background-color: blue;
+}
+
+.basic-move {
   background-color: red;
 }

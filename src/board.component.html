@@ -1,9 +1,13 @@
 <div class="container">
-  <div class="row" *ng-for="#row of squares; #i=index">
+  <div class="row" *ng-for="#row of squares; #y=index">
     <div class="square"
-      *ng-for="#square of row; #j=index"
+      *ng-for="#square of row; #x=index"
       [class.selected]="square === selectedSquare"
-      (click)="clickSquare(i, j)">
+      [class.basic-move]="square.moveType === 'basic'"
+      [class.white]="square.piece?.color === 'white'"
+      [class.black]="square.piece?.color === 'black'"
+      (click)="clickSquare(y, x)">
+      {{square.piece?.rank}}
     </div>
   </div>
 </div>

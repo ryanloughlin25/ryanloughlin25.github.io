@@ -33,8 +33,9 @@ export class BoardComponent {
 
   updateAvailableMoves(piece:Piece) {
     this.clearAvailableMoves();
-    for (let i = 0; i < piece.moves.length; i++) {
-      let move = piece.moves[i];
+    let moves = piece.getMoves();
+    for (let i = 0; i < moves.length; i++) {
+      let move = moves[i];
       let x = move.x + this.selectedX;
       let y = move.y + this.selectedY;
       let moveSquare = this.squares[y][x];
@@ -67,6 +68,7 @@ export class BoardComponent {
     } else {
       if (clickedSquare.moveType) {// === 'basic') {
         clickedSquare.piece = this.selectedSquare.piece;
+        clickedSquare.piece.flip();
         this.selectedSquare.piece = null;
       }
       this.selectedSquare = null;

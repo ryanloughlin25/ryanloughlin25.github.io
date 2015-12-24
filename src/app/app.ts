@@ -1,6 +1,7 @@
 import {bootstrap, Component, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
 import {Square} from './square';
 import {Piece} from './piece';
+
 @Component({
   selector: 'board',
   templateUrl: 'board.component.html',
@@ -8,10 +9,16 @@ import {Piece} from './piece';
   styleUrls: ['board.css'],
 })
 export class BoardComponent {
+  size = null;
+  squares = null;
+  selectedX = null;
+  selectedY = null;
+  selectedSquare = null;
+
   constructor() {
     this.size = 6;
-    this.squares = Array(this.size).fill().map(
-      () => Array(this.size).fill().map(
+    this.squares = Array(this.size).fill(null).map(
+      () => Array(this.size).fill(null).map(
         () => new Square()
       )
     );

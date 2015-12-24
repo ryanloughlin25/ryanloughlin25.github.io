@@ -38,8 +38,8 @@ export class BoardComponent {
       let move = moves[i];
       let x = move.x + this.selectedX;
       let y = move.y + this.selectedY;
-      let moveSquare = this.squares[y][x];
       if (x >= 0 && x < this.size && y >= 0 && y < this.size) {
+        let moveSquare = this.squares[y][x];
         if (!moveSquare.piece ||
             moveSquare.piece.color != this.selectedSquare.piece.color) {
           moveSquare.moveType = 'basic';

@@ -9,11 +9,12 @@ import {Piece} from './piece';
   styleUrls: ['board.css'],
 })
 export class BoardComponent {
-  size = null;
-  squares = null;
-  selectedX = null;
-  selectedY = null;
-  selectedSquare = null;
+  size:number;
+  squares:Square[][];
+  pieces:Piece[];
+  selectedX:number;
+  selectedY:number;
+  selectedSquare:Square;
 
   constructor() {
     this.size = 6;

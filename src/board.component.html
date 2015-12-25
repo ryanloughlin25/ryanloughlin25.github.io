@@ -4,10 +4,13 @@
       *ng-for="#square of row; #x=index"
       [class.selected]="square === selectedSquare"
       [class.basic-move]="square.moveType === 'basic'"
-      [class.white]="square.piece?.color === 'white'"
-      [class.black]="square.piece?.color === 'black'"
       (click)="clickSquare(y, x)">
-      {{square.piece?.rank}}
+      <div class="piece"
+        *ng-if="square.piece"
+        [class.white]="square.piece.color === 'white'"
+        [class.black]="square.piece.color === 'black'">
+        {{square.piece?.rank}}
+      </div>
     </div>
   </div>
 </div>

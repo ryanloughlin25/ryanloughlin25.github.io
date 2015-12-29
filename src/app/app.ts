@@ -12,8 +12,8 @@ export class BoardComponent {
   size:number;
   squares:Square[][];
   pieces:Piece[];
-  selectedX:number;
-  selectedY:number;
+  selectedColumn:number;
+  selectedRow:number;
   selectedSquare:Square;
   turn:string;
 
@@ -29,46 +29,73 @@ export class BoardComponent {
   }
 
   hardcodePieces() {
-    this.squares[2][1].piece = new Piece('footman', 'white');
-    this.squares[2][3].piece = new Piece('footman', 'white');
+    this.squares[0][1].piece = new Piece('footman', 'white');
+    this.squares[0][2].piece = new Piece('duke', 'white');
+    this.squares[1][2].piece = new Piece('footman', 'white');
 
-    this.squares[4][1].piece = new Piece('footman', 'black');
-    this.squares[4][3].piece = new Piece('footman', 'black');
+    this.squares[5][1].piece = new Piece('footman', 'black');
+    this.squares[5][2].piece = new Piece('duke', 'black');
+    this.squares[4][2].piece = new Piece('footman', 'black');
+  }
+
+  onBoard(row:number, column:number) {
+    return column >= 0 && column < this.size && row >= 0 && row < this.size;
   }
 
   updateAvailableMoves(piece:Piece) {
     this.clearAvailableMoves();
-    let moves = piece.getMoves();
-    for (let i = 0; i < moves.length; i++) {
-      let move = moves[i];
-      let x = move.x + this.selectedX;
-      let y = move.y + this.selectedY;
-      if (x >= 0 && x < this.size && y >= 0 && y < this.size) {
-        let moveSquare = this.squares[y][x];
-        if (!moveSquare.piece ||
-            moveSquare.piece.color != this.selectedSquare.piece.color) {
-          moveSquare.moveType = 'basic';
+    let allMoves = piece.getMoves();
+    for (var moveType in allMoves) {
+      let moves = allMoves[moveType];
+      for (let i = 0; i < moves.length; i++) {
+        let move = moves[i];
+        let row = move.row + this.selectedRow;
+        let column = move.column + this.selectedColumn;
+        if (this.onBoard(row, column)) {
+          let moveSquare = this.squares[row][column];
+          if (!moveSquare.piece ||
+              moveSquare.piece.color != this.selectedSquare.piece.color) {
+            if (moveType === 'basic') {
+              moveSquare.moveType = moveType;
+            } else if (moveType === 'slide') {
+              while (this.onBoard(row, column)) {
+                let moveSquare = this.squares[row][column];
+                if (!moveSquare.piece) {
+                  moveSquare.moveType = moveType;
+                } else {
+                  if (moveSquare.piece.color === this.turn) {
+                    break;
+                  } else {
+                    moveSquare.moveType = moveType;
+                    break;
+                  }
+                }
+                row += move.row;
+                column += move.column;
+              }
+            }
+          }
         }
       }
     }
   }
 
   clearAvailableMoves() {
-    for (let y = 0; y < this.squares.length; y++) {
-      for (let x = 0; x < this.squares[y].length; x++) {
-        this.squares[y][x].moveType = null;
+    for (let row = 0; row < this.squares.length; row++) {
+      for (let column = 0; column < this.squares[row].length; column++) {
+        this.squares[row][column].moveType = null;
       }
     }
   }
 
-  clickSquare(y, x) {
-    let clickedSquare = this.squares[y][x];
+  clickSquare(row, column) {
+    let clickedSquare = this.squares[row][column];
     console.log(clickedSquare);
     if (clickedSquare.piece && clickedSquare.piece.color === this.turn) {
       //select piece
       this.selectedSquare = clickedSquare;
-      this.selectedY = y;
-      this.selectedX = x;
+      this.selectedRow = row;
+      this.selectedColumn = column;
       this.updateAvailableMoves(clickedSquare.piece);
     } else {
       if (clickedSquare.moveType) {// === 'basic') {
@@ -81,8 +108,8 @@ export class BoardComponent {
       }
       //unselect piece
       this.selectedSquare = null;
-      this.selectedY = null;
-      this.selectedX = null;
+      this.selectedRow = null;
+      this.selectedColumn = null;
       this.clearAvailableMoves();
     }
   }

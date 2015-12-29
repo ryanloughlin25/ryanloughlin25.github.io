@@ -26,6 +26,10 @@
   background-color: blue;
 }
 
-.basic-move {
+.basic {
   background-color: red;
+}
+
+.slide {
+  background-color: green;
 }

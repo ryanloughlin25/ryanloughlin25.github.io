@@ -14,24 +14,44 @@ export class Piece {
     this.color = color;
     this.side = 'front';
     this.moves = {
-      'front': [
-        new Point(0, -1),
-        new Point(-1, 0),
-        new Point(1, 0),
-        new Point(0, 1),
-      ],
-      'back': [
-        new Point(0, -2),
-        new Point(-1, -1),
-        new Point(1, -1),
-        new Point(-1, 1),
-        new Point(1, 1),
-      ],
+      'footman': {
+        'front': {
+          'basic': [
+            new Point(-1, 0),
+            new Point(0, -1),
+            new Point(0, 1),
+            new Point(1, 0),
+          ],
+        }
+        'back': {
+          'basic': [
+            new Point(-2, 0),
+            new Point(-1, -1),
+            new Point(-1, 1),
+            new Point(1, -1),
+            new Point(1, 1),
+          ],
+        }
+      },
+      'duke': {
+        'front': {
+          'slide': [
+            new Point(0, -1),
+            new Point(0, 1),
+          ],
+        }
+        'back': {
+          'slide': [
+            new Point(-1, 0),
+            new Point(1, 0),
+          ],
+        }
+      },
     }
   }
 
   getMoves() {
-    return this.moves[this.side];
+    return this.moves[this.rank][this.side];
   }
 
   flip() {

@@ -1,12 +1,12 @@
 export class Point {
-  x: number;
-  y: number;
+  row: number;
+  column: number;
 
   constructor(
-    x: number,
-    y: number
+    row: number,
+    column: number
   ) {
-    this.x = x;
-    this.y = y;
+    this.row = row;
+    this.column = column;
   }
 }

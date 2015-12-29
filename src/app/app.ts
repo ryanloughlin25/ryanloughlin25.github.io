@@ -15,9 +15,11 @@ export class BoardComponent {
   selectedX:number;
   selectedY:number;
   selectedSquare:Square;
+  turn:string;
 
   constructor() {
     this.size = 6;
+    this.turn = 'white';
     this.squares = Array(this.size).fill(null).map(
       () => Array(this.size).fill(null).map(
         () => new Square()
@@ -29,6 +31,8 @@ export class BoardComponent {
   hardcodePieces() {
     this.squares[2][1].piece = new Piece('footman', 'white');
     this.squares[2][3].piece = new Piece('footman', 'white');
+
+    this.squares[4][1].piece = new Piece('footman', 'black');
     this.squares[4][3].piece = new Piece('footman', 'black');
   }
 
@@ -60,18 +64,22 @@ export class BoardComponent {
   clickSquare(y, x) {
     let clickedSquare = this.squares[y][x];
     console.log(clickedSquare);
-    //TODO: if statement should respect piece color
-    if (clickedSquare.piece) {
+    if (clickedSquare.piece && clickedSquare.piece.color === this.turn) {
+      //select piece
       this.selectedSquare = clickedSquare;
       this.selectedY = y;
       this.selectedX = x;
       this.updateAvailableMoves(clickedSquare.piece);
     } else {
       if (clickedSquare.moveType) {// === 'basic') {
+        //move piece
         clickedSquare.piece = this.selectedSquare.piece;
         clickedSquare.piece.flip();
         this.selectedSquare.piece = null;
+        //change turn
+        this.turn = this.turn === 'white' ? 'black' : 'white';
       }
+      //unselect piece
       this.selectedSquare = null;
       this.selectedY = null;
       this.selectedX = null;

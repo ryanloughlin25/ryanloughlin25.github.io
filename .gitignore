@@ -1,4 +1,3 @@
 node_modules
 *.swp
-src/app/*.js.map
-src/app/*.js
+npm-debug.log

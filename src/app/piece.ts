@@ -22,7 +22,7 @@ export class Piece {
             new Point(0, 1),
             new Point(1, 0),
           ],
-        }
+        },
         'back': {
           'basic': [
             new Point(-2, 0),
@@ -39,7 +39,7 @@ export class Piece {
             new Point(0, -1),
             new Point(0, 1),
           ],
-        }
+        },
         'back': {
           'slide': [
             new Point(-1, 0),

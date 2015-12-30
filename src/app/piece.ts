@@ -8,11 +8,14 @@ export class Piece {
 
   constructor(
     rank: string,
-    color: string
+    color: string,
+    side?: string
   ) {
     this.rank = rank;
     this.color = color;
-    this.side = 'front';
+    this.side = side || 'front';
+    //TODO: fix bug, all piece are facing top of board currently.  white piece need to face bottom of board.
+    //TODO: move to json and only load moves for this piece's rank
     this.moves = {
       'footman': {
         'front': {

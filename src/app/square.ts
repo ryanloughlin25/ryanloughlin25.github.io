@@ -8,7 +8,7 @@ export class Square {
     piece?: Piece,
     moveType?: string
   ) {
-    this.piece = piece;
-    this.moveType = moveType;
+    this.piece = piece || null;
+    this.moveType = moveType || null;
   }
 }

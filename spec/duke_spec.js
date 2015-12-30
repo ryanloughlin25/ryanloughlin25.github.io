@@ -1,10 +1,11 @@
+//TODO: tests are timing out after adding firebase
 describe('Duke', function() {
   function square(y, x) {
     return element.all(by.className('square')).get(y*6 + x);
   }
 
   beforeEach(function() {
-    browser.get('http://localhost:8080/src');
+    browser.get('http://localhost:8080');
   });
 
   it('should load the page', function() {

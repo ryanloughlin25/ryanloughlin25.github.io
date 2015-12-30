@@ -1,9 +1,11 @@
 var point_1 = require('./point');
 var Piece = (function () {
-    function Piece(rank, color) {
+    function Piece(rank, color, side) {
         this.rank = rank;
         this.color = color;
-        this.side = 'front';
+        this.side = side || 'front';
+        //TODO: fix bug, all piece are facing top of board currently.  white piece need to face bottom of board.
+        //TODO: move to json and only load moves for this piece's rank
         this.moves = {
             'footman': {
                 'front': {

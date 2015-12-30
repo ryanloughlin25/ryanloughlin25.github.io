@@ -16,8 +16,10 @@ export class BoardComponent {
   selectedRow:number;
   selectedSquare:Square;
   turn:string;
+  firebase:any;
 
   constructor() {
+    let board = this;
     this.size = 6;
     this.turn = 'white';
     this.squares = Array(this.size).fill(null).map(
@@ -26,6 +28,44 @@ export class BoardComponent {
       )
     );
     this.hardcodePieces();
+    this.firebase = new Firebase("https://ryanloughlin.firebaseio.com/");
+    this.firebase.child('game').on('value', function(snapshot) {
+      let game = snapshot.val();
+      if (game) {
+        let firebaseBoard = JSON.parse(game.squares);
+        for (let row = 0; row < firebaseBoard.length; row++) {
+          for (let column = 0; column < firebaseBoard[row].length; column++) {
+            let firebaseSquare = firebaseBoard[row][column];
+            let square = new Square();
+            if (firebaseSquare.piece) {
+              square.piece = new Piece(firebaseSquare.piece.rank, firebaseSquare.piece.color, firebaseSquare.piece.side);
+            }
+            board.squares[row][column] = square;
+          }
+        }
+        board.turn = game.turn;
+      }
+    });
+  }
+
+  resetBoard() {
+    this.turn = 'white';
+    this.squares = Array(this.size).fill(null).map(
+      () => Array(this.size).fill(null).map(
+        () => new Square()
+      )
+    );
+    this.hardcodePieces();
+    this.updateFirebase();
+  }
+
+  updateFirebase() {
+    this.firebase.set({
+      game: {
+        squares: JSON.stringify(this.squares),
+        turn: this.turn,
+      },
+    });
   }
 
   hardcodePieces() {
@@ -99,12 +139,18 @@ export class BoardComponent {
       this.updateAvailableMoves(clickedSquare.piece);
     } else {
       if (clickedSquare.moveType) {// === 'basic') {
+        if (clickedSquare.piece && clickedSquare.piece.rank === 'duke') {
+          alert(this.turn + ' wins!');
+          this.resetBoard();
+          return;
+        }
         //move piece
         clickedSquare.piece = this.selectedSquare.piece;
         clickedSquare.piece.flip();
         this.selectedSquare.piece = null;
         //change turn
         this.turn = this.turn === 'white' ? 'black' : 'white';
+        this.updateFirebase();
       }
       //unselect piece
       this.selectedSquare = null;

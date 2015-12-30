@@ -13,11 +13,45 @@ var piece_1 = require('./piece');
 var BoardComponent = (function () {
     function BoardComponent() {
         var _this = this;
+        var board = this;
         this.size = 6;
         this.turn = 'white';
         this.squares = Array(this.size).fill(null).map(function () { return Array(_this.size).fill(null).map(function () { return new square_1.Square(); }); });
         this.hardcodePieces();
+        this.firebase = new Firebase("https://ryanloughlin.firebaseio.com/");
+        this.firebase.child('game').on('value', function (snapshot) {
+            var game = snapshot.val();
+            if (game) {
+                var firebaseBoard = JSON.parse(game.squares);
+                for (var row = 0; row < firebaseBoard.length; row++) {
+                    for (var column = 0; column < firebaseBoard[row].length; column++) {
+                        var firebaseSquare = firebaseBoard[row][column];
+                        var square = new square_1.Square();
+                        if (firebaseSquare.piece) {
+                            square.piece = new piece_1.Piece(firebaseSquare.piece.rank, firebaseSquare.piece.color, firebaseSquare.piece.side);
+                        }
+                        board.squares[row][column] = square;
+                    }
+                }
+                board.turn = game.turn;
+            }
+        });
     }
+    BoardComponent.prototype.resetBoard = function () {
+        var _this = this;
+        this.turn = 'white';
+        this.squares = Array(this.size).fill(null).map(function () { return Array(_this.size).fill(null).map(function () { return new square_1.Square(); }); });
+        this.hardcodePieces();
+        this.updateFirebase();
+    };
+    BoardComponent.prototype.updateFirebase = function () {
+        this.firebase.set({
+            game: {
+                squares: JSON.stringify(this.squares),
+                turn: this.turn,
+            },
+        });
+    };
     BoardComponent.prototype.hardcodePieces = function () {
         this.squares[0][1].piece = new piece_1.Piece('footman', 'white');
         this.squares[0][2].piece = new piece_1.Piece('duke', 'white');
@@ -88,12 +122,18 @@ var BoardComponent = (function () {
         }
         else {
             if (clickedSquare.moveType) {
+                if (clickedSquare.piece && clickedSquare.piece.rank === 'duke') {
+                    alert(this.turn + ' wins!');
+                    this.resetBoard();
+                    return;
+                }
                 //move piece
                 clickedSquare.piece = this.selectedSquare.piece;
                 clickedSquare.piece.flip();
                 this.selectedSquare.piece = null;
                 //change turn
                 this.turn = this.turn === 'white' ? 'black' : 'white';
+                this.updateFirebase();
             }
             //unselect piece
             this.selectedSquare = null;
